@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seuratty</title>
+<link rel="icon" href="data/seuratty.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="top" display="flex">
+    <div class="brand"><img width="23px" height="23px" src="data/seuratty_logo.png" alt="" class="brandLogo"><h1>Seuratty</h1></div>
+    <div class="mob" id="mob" role="dialog" aria-modal="true" aria-label="Small screen notice" hidden>
+      <h1 style="font-size:19px">Seuratty</h1>
+      <p>Seuratty is made for large screens with a mouse and keyboard. It works here, but it will feel cramped.</p>
+      <button type="button" class="btn primary" id="mobOk">Continue anyway</button>
+    </div>
+  </header>
+
+  <aside class="tools" aria-label="Tools">
+    <section>
+      <h2>Tool</h2>
+      <div class="toolbtns" id="toolbtns"></div>
+      <p class="hint" id="hint"></p>
+    </section>
+    <section>
+      <h2>View</h2>
+      <label class="check"><input type="checkbox" id="ghost"> Empty dots</label>
+      <label class="check"><input type="checkbox" id="grid"> Grid</label>
+      <div class="row" style="margin-top:6px"><label for="bg" class="dim">Background</label><input type="color" id="bg" value="#000000"></div>
+    </section>
+    <a class="gh" href="https://github.com/WilliamsACE" target="_blank" rel="noopener" aria-label="WilliamsACE on GitHub" title="WilliamsACE on GitHub"><svg viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </aside>
+
+  <div class="warn" id="newAsk" role="alertdialog" aria-modal="true" aria-labelledby="newAskT" hidden>
+    <div class="warnbox">
+      <h2 id="newAskT">Erase everything?</h2>
+      <p>This replaces the whole canvas with a blank one. You can still undo it.</p>
+      <div class="row"><button type="button" class="btn danger" id="newYes">Erase</button><button type="button" class="btn" id="newNo">Cancel</button></div>
+    </div>
+  </div>
+  <main class="stage-col">
+    <div class="bar">
+      <button class="btn" id="undo" disabled>Undo</button>
+      <button class="btn" id="redo" disabled>Redo</button>
+      <button class="btn" id="newCv">New canvas</button>
+      <span class="sp"></span>
+      <label for="zoom">Zoom <input type="range" id="zoom" min="0.25" max="4" step="0.05" value="1"></label>
+      <button class="btn" id="fit">Fit</button>
+      <span class="dim" id="dim"></span>
+    </div>
+    <div class="stage" id="stage"><div class="wrap" id="wrap"><canvas id="cv" aria-label="Braille art canvas"></canvas><canvas id="pv" aria-hidden="true"></canvas><div id="rsBox" hidden><span></span></div><div id="selBox" hidden></div><button type="button" id="grip" aria-label="Resize canvas: drag, or use the arrow keys" title="Drag to resize"></button><div id="cursor" hidden></div></div></div>
+    <div class="status"><span id="msg" role="status"></span><span id="cellInfo"></span></div>
+  </main>
+
+  <aside class="side">
+    <section class="panel dock">
+      <div class="tabs" role="tablist" aria-label="Character, color, brush and erase">
+        <button type="button" role="tab" id="tabChar" aria-selected="true" aria-controls="paneChar">Character</button>
+        <button type="button" role="tab" id="tabColor" aria-selected="false" aria-controls="paneColor" tabindex="-1">Color</button>
+        <button type="button" role="tab" id="tabBrush" aria-selected="false" aria-controls="paneBrush" tabindex="-1">Brush &amp; Erase</button>
+      </div>
+      <div role="tabpanel" id="paneChar" aria-labelledby="tabChar">
+      <div class="curchar">
+        <div id="curGlyph">⣿</div>
+        <div class="curmeta"><div id="curCode"></div><div id="curName"></div></div>
+        <div class="builder" id="builder" aria-label="Braille dot builder"></div>
+      </div>
+      <div id="palette" style="margin-top:12px"></div>
+      <div class="row" style="margin-top:10px">
+        <input type="text" id="custom" placeholder="Type or paste characters" style="flex:1" aria-label="Custom characters">
+        <button class="btn" id="addChars">Add</button>
+      </div>
+      </div>
+      <div role="tabpanel" id="paneColor" aria-labelledby="tabColor" hidden>
+      <div class="row">
+        <input type="color" id="colorPicker" value="#1b98a9" aria-label="Pick a color">
+        <input type="text" id="colorHex" value="#1b98a9" maxlength="7" style="width:92px;font-family:var(--mono)" aria-label="Hex color">
+        <button class="btn" id="noColor">No color</button>
+      </div>
+      <div class="grp"><h3>In drawing</h3><div class="row" id="docColors" style="gap:4px"></div></div>
+      <div class="grp"><h3>Recent</h3><div class="row" id="recent" style="gap:4px"></div></div>
+      </div>
+      <div role="tabpanel" id="paneBrush" aria-labelledby="tabBrush" hidden>
+      <label for="size" class="dim" style="display:block;margin-bottom:4px">Size <span id="sizeVal">1</span></label>
+      <input type="range" id="size" min="1" max="8" value="1">
+      <div id="dotModeWrap">
+        <label for="dotMode" class="dim" style="display:block;margin:10px 0 4px">Dot mode</label>
+        <select id="dotMode" style="width:100%">
+          <option value="paint" selected>Paint dots</option>
+          <option value="cell">Paint full cell (2×4)</option>
+        </select>
+      </div>
+      <div id="eraseModeWrap" hidden>
+        <label for="eraseMode" class="dim" style="display:block;margin:10px 0 4px">Erase mode</label>
+        <select id="eraseMode" style="width:100%">
+          <option value="dots" selected>Dots (for braille)</option>
+          <option value="cell">Full cell (2×4)</option>
+        </select>
+      </div>
+      </div>
+      <hr class="sep">
+      <div class="grp"><h3>Layers</h3>
+      <ul class="layers" id="layers" aria-label="Layers"></ul>
+      <div class="row" style="margin-top:6px">
+        <button type="button" class="btn sm" id="lyAdd">+ Layer</button>
+        <button type="button" class="btn sm" id="lyDup">Duplicate</button>
+        <span class="dim" style="font-size:11.5px;flex-basis:100%">Drag to reorder, or focus a layer and press ↑ / ↓. Shift+click the canvas to pick the layer under the cursor.</span>
+      </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Canvas</h2>
+      <div class="row">
+        <input type="number" id="rsCols" min="1" max="400" aria-label="Columns">
+        <span class="dim">×</span>
+        <input type="number" id="rsRows" min="1" max="200" aria-label="Rows">
+        <span class="dim">cells</span>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn primary" id="rsApply">Resize</button>
+      </div>
+      <p class="note">1 cell = 2 × 4 dots. Max 400 × 200. You can also drag the dot at the canvas corner.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Image to ASCII</h2>
+      <div class="row">
+        <label class="btn" for="imgFile" style="display:inline-flex;align-items:center">Choose image</label>
+        <input type="file" id="imgFile" accept="image/*" hidden>
+        <span class="dim" id="imgName" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">No image</span>
+      </div>
+      <label for="imgStyle" class="dim" style="display:flex;align-items:center;gap:6px;margin:10px 0 4px">Style<button type="button" class="info" tabindex="0" aria-label="About the Braille style">i<span class="tip l" role="tooltip">Braille fits the most detail into a small size. For small results, use it as a base and draw over it to fix details for a better final art.</span></button></label>
+      <select id="imgStyle" style="width:100%">
+        <option value="braille" selected>Braille</option>
+        <option value="default">Default</option>
+        <option value="classic">Classic</option>
+        <option value="extended">Extended</option>
+        <option value="blocks">Blocks</option>
+        <option value="custom">Custom…</option>
+      </select>
+      <input type="text" id="imgCustom" value=" .:-=+*#%@" aria-label="Custom characters, dark to bright" placeholder="Dark to bright" style="width:100%;margin-top:6px;font-family:var(--mono);display:none">
+      <hr class="sep">
+      <div class="imgdims">
+        <div class="fld"><label for="imgCols" class="dim">Width</label><input type="number" id="imgCols" min="10" max="400" value="100"></div>
+        <div class="fld"><label for="imgRows" class="dim" style="display:flex;align-items:center;gap:6px">Height<button type="button" class="info" tabindex="0" aria-label="About width and height">i<span class="tip" role="tooltip">Width: 10–400. Height: 1–200, optional — leave it empty to keep the image's proportions using Aspect instead. A very tall result is capped at 200 rows, which then narrows the width to fit.</span></button></label><input type="number" id="imgRows" min="1" max="200" placeholder="Auto"></div>
+        <div class="fld"><label for="imgAspect" class="dim">Aspect</label><input type="number" id="imgAspect" min="0.5" max="2" step="0.05" value="1" title="1.00 keeps exact proportions here. 1.10 matches asciify-them in a terminal."></div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <select id="imgColor" aria-label="Colors" style="flex:1">
+          <option value="color" selected>Color</option>
+          <option value="bw">Black &amp; white</option>
+        </select>
+        <label class="check"><input type="checkbox" id="imgEdges"> Edges</label>
+      </div>
+      <button class="btn primary" id="imgGo" style="width:100%;margin-top:10px">Convert</button>
+      <p class="note">Comes in as a floating selection: drag it, then click outside or switch tool to place it into the active layer. Escape discards it, Ctrl+Z undoes it once placed. Based on <a href="https://github.com/ndrscalia/asciify-them" target="_blank" rel="noopener">asciify-them</a> (MIT).</p>
+    </section>
+
+    <section class="panel">
+      <h2>Text</h2>
+      <input type="text" id="txt" value="I &lt;3 ASCII" aria-label="Text" style="width:100%">
+      <div class="row" style="margin-top:8px">
+        <div style="flex:1;min-width:0">
+          <select id="font" hidden aria-label="Font"></select>
+          <button type="button" class="btn fbtn" id="fontBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Font"><span></span></button>
+        </div>
+        <select id="layout" aria-label="Horizontal layout" style="width:112px">
+          <option value="default" selected>Default</option>
+          <option value="full">Full</option>
+          <option value="fitted">Fitted</option>
+          <option value="universal smushing">Smushed</option>
+        </select>
+      </div>
+      <pre id="txtPrev" aria-label="Text preview"></pre>
+      <div class="row" style="margin-top:8px">
+        <input type="color" id="gA" value="#3b82f6" aria-label="Start color">
+        <input type="color" id="gB" value="#a855f7" aria-label="Middle color">
+        <select id="gMode" aria-label="Gradient type" style="flex:1">
+          <option value="mid" selected>Color 1 → 2 → 1</option>
+          <option value="lin">Color 1 → 2</option>
+          <option value="solid">Single color</option>
+        </select>
+      </div>
+      <label class="check" style="margin-top:6px"><input type="checkbox" id="tTransp" checked> Transparent spaces</label>
+      <div class="row" style="margin-top:6px">
+        <button class="btn" id="copyLine">Copy ANSI text</button>
+        <label class="btn" for="fontFile" style="display:inline-flex;align-items:center">Load .flf font</label>
+        <input type="file" id="fontFile" accept=".flf,text/plain" hidden>
+      </div>
+      <p class="note">Use the Text tool (6): click to place, drag to move.</p>
+      <p class="note">figlet.js (MIT). Fonts keep their authors' credits.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Import</h2>
+      <textarea id="paste" rows="3" placeholder="Paste asciify-them output"></textarea>
+      <div class="row" style="margin-top:8px">
+        <button class="btn primary" id="loadText">Load text</button>
+        <label class="btn" for="file" style="display:inline-flex;align-items:center">Open file</label>
+        <input type="file" id="file" accept=".txt,.ansi,.asc,.seuratty,.json,text/plain,application/json" hidden>
+      </div>
+      <p class="note">Or drop a .txt or .seuratty project on the canvas.</p>
+      <div class="row" style="margin-top:8px"><button class="btn" id="sample">Load example</button></div>
+    </section>
+
+    <section class="panel">
+      <h2>Export</h2>
+      <div class="dim" style="margin-bottom:4px;display:flex;align-items:center;gap:6px">Format<button type="button" class="info" tabindex="0" aria-label="Tip for braille art in editors">i<span class="tip" role="tooltip">Braille art looks misaligned in editors whose font has no braille (like Notepad’s default). Set the editor font to a monospace one that includes braille, such as Cascadia Mono on Windows, DejaVu Sans Mono or JetBrains Mono.</span></button></div>
+      <select id="fmt" aria-label="Export format" style="width:100%">
+        <option value="compact">ANSI colors, compact</option>
+        <option value="per">ANSI colors, per character</option>
+        <option value="plain">Plain text, no colors</option>
+        <option value="project">Project (editable, keeps layers)</option>
+      </select>
+      <div class="row" style="margin-top:8px">
+        <button class="btn primary" id="copy">Copy</button>
+        <button class="btn" id="save">Save</button>
+      </div>
+      <hr class="sep">
+      <div class="row">
+        <button class="btn" id="savePng">Save .png</button>
+        <label class="check"><input type="checkbox" id="pngTransp"> No background</label>
+      </div>
+    </section>
+  </aside>
+</div>
+
+<script src="js/figlet.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
