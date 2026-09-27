@@ -23,7 +23,7 @@
 <br>
 
 <div align="center"><sub><strong>Example (54x18 characters)</strong></sub><br>
-<img src="https://res.cloudinary.com/onmbqxem/image/upload/f_auto,q_auto,w_900/v1790482083/Video_Project_5XD_1.webp" width="80%" alt="The art creation process">
+<img src="docs/demo-hero.webp" width="80%" alt="The art creation process">
 <p><em>»» From image to text-based art — with full manual control ««</em></p>
 </div>
 
@@ -48,13 +48,13 @@
 <p><em>See the editor in action. Paint cell by cell, manage layers, and use selection tools just like a standard graphics editor.</em></p>
 
 <div align="center">
-  <img width="85%" src="https://res.cloudinary.com/onmbqxem/image/upload/q_auto,w_600/v1790487670/output.gif" alt="Example of creating ASCII art in the interface">
+  <img width="85%" src="docs/workspace.gif" alt="Example of creating ASCII art in the interface">
   <p><em>»» Painting cell by cell, with layers and color ««</em></p>
 </div>
 
 <hr>
 
-<div align="center"><img width="85%" src="https://res.cloudinary.com/onmbqxem/image/upload/v1790488177/e5db3f90-c0e1-4b54-a22a-4a814ead22a3.png" alt="Seuratty Interface">
+<div align="center"><img width="85%" src="docs/interface.png" alt="Seuratty Interface">
 <p><em>»» Layers, tools, image-to-ASCII, ASCII text (and more) in the interface ««</em></p>
 </div>
 
