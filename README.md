@@ -33,13 +33,13 @@
 <h2> ✨ Features</h2>
 
 <ul>
-  <li>🔹<strong> Braille, ANSI &amp; ASCII</strong> — Create and edit Braille, ANSI, and ASCII art.</li>
-  <li>🔹<strong> Layer-based editing</strong> — Organize your artwork with up to <strong>10 layers</strong>.</li>
-  <li>🔹<strong> Powerful selection tools</strong> — Move, copy, paste, nudge, and flip artwork while preserving colors.</li>
-  <li>🔹<strong> FIGlet text</strong> — Add stylized text with <strong>83+ built-in fonts</strong>, gradients, and custom <code>.flf</code> fonts.</li>
-  <li>🔹<strong> Image to Braille / ASCII</strong> — Convert images into text-based art with customizable size, aspect ratio, and color.</li>
-  <li>🔹<strong> Multiple export formats</strong> — Export to ANSI, TXT, PNG, or editable <code>.seuratty</code> projects.</li>
-  <li>🔹<strong> Automatic saving</strong> — Your work is automatically saved and restored in the browser.</li>
+  <li><strong> Braille, ANSI &amp; ASCII</strong> — Create and edit Braille, ANSI, and ASCII art.</li>
+  <li><strong> Layer-based editing</strong> — Organize your artwork with up to <strong>10 layers</strong>.</li>
+  <li><strong> Powerful selection tools</strong> — Move, copy, paste, nudge, and flip artwork while preserving colors.</li>
+  <li><strong> FIGlet text</strong> — Add stylized text with <strong>83+ built-in fonts</strong>, gradients, and custom <code>.flf</code> fonts.</li>
+  <li><strong> Image to Braille / ASCII</strong> — Convert images into text-based art with customizable size, aspect ratio, and color.</li>
+  <li><strong> Multiple export formats</strong> — Export to ANSI, TXT, PNG, or editable <code>.seuratty</code> projects.</li>
+  <li><strong> Automatic saving</strong> — Your work is automatically saved and restored in the browser.</li>
 </ul>
 
 <br>
