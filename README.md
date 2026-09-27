@@ -23,7 +23,7 @@
 <br>
 
 <div align="center"><sub><strong>Example (54x18 characters)</strong></sub><br>
-<img src="https://res.cloudinary.com/onmbqxem/image/upload/v1790482083/Video_Project_5XD_1.gif" width="80%" alt="The art creation process">
+<img src="https://res.cloudinary.com/onmbqxem/image/upload/f_auto,q_auto,w_900/v1790482083/Video_Project_5XD_1.webp" width="80%" alt="The art creation process">
 <p><em>»» From image to text-based art — with full manual control ««</em></p>
 </div>
 
@@ -48,7 +48,7 @@
 <p><em>See the editor in action. Paint cell by cell, manage layers, and use selection tools just like a standard graphics editor.</em></p>
 
 <div align="center">
-  <img width="85%" src="https://res.cloudinary.com/onmbqxem/image/upload/v1790487670/output.gif" alt="Example of creating ASCII art in the interface">
+  <img width="85%" src="https://res.cloudinary.com/onmbqxem/image/upload/q_auto,w_600/v1790487670/output.gif" alt="Example of creating ASCII art in the interface">
   <p><em>»» Painting cell by cell, with layers and color ««</em></p>
 </div>
 
